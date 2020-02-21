@@ -10,8 +10,6 @@
 <body>
 <p>This is template test.</p>
 
-
-
 <div class='row'>
     <div class='col-sm-12' url-endpint='{% url "api-data"%}'>
         <h1>hello world</h1>
@@ -20,7 +18,15 @@
 
     </div>
 </div>
-
+<div>
+    <from action='{% url "date" %}', method="get">
+        <label>日付：<input type="text" size="20" name="date"></label>
+        <input type="submit" value="送信">
+    </from>
+    {%if date %}
+      {{ date }}です
+    {% endif %}
+</div>
 <script>
 //https://www.codingforentrepreneurs.com/projects/django-chartjs/django-and-chartjs
 var endpoint = 'api/data'

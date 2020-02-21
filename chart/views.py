@@ -16,3 +16,7 @@ def get_data(request):
         "temp":[d.temp for d in TempData.objects.all()],
         }
     return JsonResponse(data)
+
+def get_day_data(request):
+    d = {'date': request.GET.get('date')}
+    return render(request, 'index.html', d)
