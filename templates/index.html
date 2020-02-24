@@ -19,10 +19,10 @@
     </div>
 </div>
 <div>
-    <from action='{% url "date" %}', method="get">
+    <form action="get", method="get">
         <label>日付：<input type="text" size="20" name="date"></label>
         <input type="submit" value="送信">
-    </from>
+    </form>
     {%if date %}
       {{ date }}です
     {% endif %}

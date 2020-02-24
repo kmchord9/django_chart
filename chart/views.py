@@ -5,7 +5,7 @@ from .models import TempData
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index2.html')
 
 def get_data(request):
     labels = ["赤", "青", "黄色", "緑"]
@@ -18,5 +18,7 @@ def get_data(request):
     return JsonResponse(data)
 
 def get_day_data(request):
-    d = {'date': request.GET.get('date')}
-    return render(request, 'index.html', d)
+    #d = {'date': request.GET.get('date')}
+    data = request.GET.get('date')
+    #data = 5
+    return HttpResponse(data)

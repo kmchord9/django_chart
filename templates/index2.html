@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body>
+    <form action="ajax" method="get">
+        {% csrf_token %}
+        <label>日付：<input type="text" size="20" name="date"></label>
+        <input type="submit" value="送信">
+    </form>
+
+    <span id="id_div_ajax_response">
+        AJAX RESPONSE
+    </span>
+
+    <script>
+    $("form").submit( function(event) {
+        event.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: form.prop("action"),
+            method: form.prop("method"),
+            data: form.serialize(),
+            timeout: 10000,
+            dataType: "text",
+        })
+        .done( function(data) {
+            $("#id_div_ajax_response").text(data);
+        })
+    });
+    </script>
+</body>
+</html>
