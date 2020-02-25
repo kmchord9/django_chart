@@ -21,7 +21,7 @@ function setChart(){
             data: {
                 labels: labels,
                 datasets: [{
-                    label: '室温',
+                    label: title,
                     data: defaultData,
                     borderColor: "rgba(255,0,0,1)",
                     backgroundColor: "rgba(0,0,0,0)",
@@ -50,6 +50,7 @@ $.ajax({
     success: function(data){
         labels = data.labels
         defaultData = data.temp
+        title = data.title
         //console.log(labels)
         setChart()
         console.log(data)
@@ -77,9 +78,8 @@ $("form").submit( function(event) {
   　　　　}
         labels = data.labels
         defaultData = data.temp
-        //console.log(labels)
+        title = data.title
         setChart()
-        //alert(data)
         console.log(data)
     })
 });
