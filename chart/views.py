@@ -8,11 +8,10 @@ def index(request):
     return render(request, 'index2.html')
 
 def get_data(request):
-    labels = ["赤", "青", "黄色", "緑"]
-
+    #labels = ["赤", "青", "黄色", "緑"]
     #, "紫", "橙"
     data = {
-        "labels": labels,
+        "labels": [d.date for d in TempData.objects.all()],
         "temp":[d.temp for d in TempData.objects.all()],
         }
     return JsonResponse(data)
