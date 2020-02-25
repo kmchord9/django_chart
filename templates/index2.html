@@ -2,9 +2,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<form action="ajax" method="get">
+<form action="api/data" method="get">
     {% csrf_token %}
-    <label>日付：<input type="text" size="20" name="date"></label>
+    <label>日付：<input type="date" size="20" name="date" id="today"></label>
     <input type="submit" value="送信">
 </form>
 
@@ -13,6 +13,32 @@
 </div>
 
 <script>
+//グラフの描画関数
+function setChart(){
+    var ctx = document.getElementById("myChart").getContext('2d');
+        window.myChart = new Chart(ctx, {
+            type:"line",
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: '室温',
+                    data: defaultData,
+                    borderColor: "rgba(255,0,0,1)",
+                    backgroundColor: "rgba(0,0,0,0)",
+            }]
+            },
+            options: {
+                animation:false,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+}    
 
 //グラフのデータ処理
 var endpoint = 'api/data'
@@ -26,51 +52,13 @@ $.ajax({
         defaultData = data.temp
         //console.log(labels)
         setChart()
+        console.log(data)
 
     },
     error: function(error_data){
         console.log("error")
     }
 })
-function setChart(){
-    var ctx = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx, {
-            type:"line",
-            data: {
-                labels: labels,
-                datasets: [{
-                    label: '室温',
-                    data: defaultData,
-                backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-            }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-        });
-}    
 
 //フォームのボタン処理
 $("form").submit( function(event) {
@@ -81,14 +69,31 @@ $("form").submit( function(event) {
         method: form.prop("method"),
         data: form.serialize(),
         timeout: 10000,
-        dataType: "text",
+        
     })
     .done( function(data) {
-        //$("#id_div_ajax_response").text(data);
-        //$("#id_div_ajax_response").html(
-            //"<h1>hello world</h1>"
-            //);
+        if (myChart) {
+    　　　　myChart.destroy();
+  　　　　}
+        labels = data.labels
+        defaultData = data.temp
+        //console.log(labels)
+        setChart()
+        //alert(data)
+        console.log(data)
     })
 });
+
+//日付の初期値設定
+var date = new Date();
+
+var yyyy = date.getFullYear();
+var mm = ("0"+(date.getMonth()+1)).slice(-2);
+var dd = ("0"+date.getDate()).slice(-2);
+
+document.getElementById("today").value=yyyy+'-'+mm+'-'+dd;
+
+
 </script>
+
 {% endblock %}
