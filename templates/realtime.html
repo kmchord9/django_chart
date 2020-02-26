@@ -26,6 +26,7 @@ var chart = new Chart(ctx, {
         autoSkip: false,
         type: 'realtime',
         realtime: {
+            duration: 60000,
             onRefresh: function(chart) {
             chart.data.datasets.forEach(function(dataset) {
                 dataset.data.push({

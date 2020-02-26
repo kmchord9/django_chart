@@ -9,7 +9,7 @@ from django.utils import timezone
 
 
 def index(request):
-    return render(request, 'index2.html')
+    return render(request, 'Chart.html')
 
 def realtime(request):
     return render(request, 'realtime.html')
