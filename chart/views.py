@@ -11,6 +11,9 @@ from django.utils import timezone
 def index(request):
     return render(request, 'index2.html')
 
+def realtime(request):
+    return render(request, 'realtime.html')
+
 def get_data(request):
     #GETリクエストの場合には送られた年月日のデータ
     if "date" in request.GET:

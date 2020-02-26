@@ -2,6 +2,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>温度グラフ</h1>
 <form action="api/data" method="get">
     {% csrf_token %}
     <label>日付：<input type="date" size="20" name="date" id="today"></label>
