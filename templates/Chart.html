@@ -11,7 +11,7 @@ var Chart = (function(){
     //変数
     var endpoint = 'api/data';
     var xData = new Array();
-    var yData = new Array();
+    var yData = "Global value";
     var labels = new Array();
     var date = new Date();
     var yyyy = date.getFullYear();
@@ -40,11 +40,14 @@ var Chart = (function(){
         })
         .then(
             data => {
-                labels = data.labels
+                //labels = data.labels
                 yData = data.temp
                 //title = data.title
                 //console.log(labels)
-                
+                //yData = "local value"
+                //console.log("inner");
+                //console.log(data);
+                //console.log(yData);
             },
             error => console.log("error")
         );
@@ -52,7 +55,7 @@ var Chart = (function(){
 
     //グラフ描画
     c.setChart = function(){
-    console.log(labels)
+    //console.log(labels)
     ctx = document.getElementById(this.chartName).getContext('2d');
         window.myChart = new Chart(ctx, {
             type:"line",
@@ -82,12 +85,12 @@ var Chart = (function(){
     return Chart;
 })();
 
-
 chart1 = new Chart("myChart");
+//temp = chart1.;
 chart1.getData();
-chart1.setChart();
-
-//console.log(chart1.labels);
+//chart1.
+console.log("outer");
+console.log(chart1.yData);
 </script>
 
 {% endblock %}
