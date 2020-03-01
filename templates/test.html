@@ -20,7 +20,7 @@ class Graph {
     constructor(graphName) {
         this.graphName = graphName;
         this.endpoint = 'api/data';
-        this.graphDate=today;
+        this.graphDate = today;
     }
 
     get getDate() {
@@ -72,7 +72,6 @@ class Graph {
         });
     }   
     
-
     showChart() {
         this.getTempData(this.graphDate)
         .then(
@@ -92,7 +91,6 @@ class Graph {
         )
 
     }
-
 
 }
 
