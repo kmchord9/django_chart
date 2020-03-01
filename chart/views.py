@@ -14,10 +14,11 @@ def index(request):
 def realtime(request):
     return render(request, 'realtime.html')
 
+
 def get_data(request):
     #GETリクエストの場合には送られた年月日のデータ
-    if "date" in request.GET:
-            data = request.GET.get('date').split('-')
+    if "prm" in request.GET:
+            data = request.GET.get('prm').split('-')
             y = data[0]
             m = data[1]
             d = data[2]
@@ -37,8 +38,9 @@ def get_data(request):
         "labels": [timezone.localtime(d.date).strftime("%H:%M:%S") for d in TempData.objects.filter(date__year=y, date__month=m, date__day=d)],
         "temp":[d.temp for d in TempData.objects.filter(date__year=y, date__month=m, date__day=d)],
         }
-    return JsonResponse(data)
 
+    return JsonResponse(data)
+    
 def get_day_data(request):
     #d = {'date': request.GET.get('date')}
     data = request.GET.get('date').split('-')
