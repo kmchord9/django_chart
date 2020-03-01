@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="chartArea">
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+<script>
+var date = new Date();
+var yyyy = date.getFullYear();
+var mm = ("0"+( date.getMonth()+1)).slice(-2);
+var dd = ("0"+ date.getDate()).slice(-2);
+var today =  yyyy+'-'+ mm+'-'+ dd;
+
+
+class Chart {
+
+    constructor(chartName) {
+        this.chartName = chartName;
+        this.endpoint = 'api/data';
+        this.xData;
+        this.yData='yData';
+        this.labels;
+    }
+
+    get getyData() {
+        return this.yData;
+    }
+
+    getTempData(date) {
+        //var defer = $.Deferred();
+        $.ajax({
+            method: "GET",
+            url: this.endpoint,
+            data: date
+            
+        })
+        .then(
+            function(data){
+                //this.labels = data.labels;
+                //this.yData = data.temp;
+                console.log("inner");
+
+                console.log(this.getyData);
+            },
+            function(error) {
+                console.log("error");
+            }
+        );
+    }
+
+
+}
+
+matu = new Chart("matu");
+matu.getTempData(today)
+console.log(matu.yData)
+//console.log(matu.yData);
+
+
+
+
+
+
+
+
+
+</script>
+
+{% endblock %}
