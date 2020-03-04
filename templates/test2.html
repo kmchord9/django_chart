@@ -16,11 +16,11 @@ data2.blue = [{red: '赤', green: '緑', blue: '青'}];
 
 console.log(data2);
 
-var chartConfig = function(type="line", labels="labels", yData="yData", realtime=false) {
+var chartConfig = function(type="line", labels, yData, realtime=false) {
     var config = {};
-    //feildグラフの種類 
+    //グラフの種類 
     config.type = type;
-    //挿入するデータ
+
     if (!realtime) {
     //--------リアルタイムではない場合----------//
     config.data =  {
